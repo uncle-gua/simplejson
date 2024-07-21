@@ -456,3 +456,12 @@ func (j *Json) MustUint64(args ...uint64) uint64 {
 
 	return def
 }
+
+func (j *Json) Len() (int, error) {
+	items, err := j.Array()
+	if err != nil {
+		return 0, err
+	}
+
+	return len(items), nil
+}
