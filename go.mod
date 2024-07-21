@@ -1,3 +1,3 @@
-module github.com/bitly/go-simplejson
+module github.com/uncle-gua/simplejson
 
 go 1.17
