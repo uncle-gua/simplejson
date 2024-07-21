@@ -9,7 +9,10 @@ import (
 	"strconv"
 )
 
-var ErrInvalidType = errors.New("invalid value type")
+var (
+	ErrInvalidType = errors.New("invalid value type")
+	ErrNotExist    = errors.New("value not exists")
+)
 
 // Implements the json.Unmarshaler interface.
 func (j *Json) UnmarshalJSON(p []byte) error {
@@ -40,6 +43,8 @@ func (j *Json) Float64() (float64, error) {
 		return float64(reflect.ValueOf(v).Uint()), nil
 	case string:
 		return strconv.ParseFloat(v, 64)
+	case nil:
+		return 0, ErrNotExist
 	}
 	return 0, ErrInvalidType
 }
@@ -59,6 +64,8 @@ func (j *Json) Int() (int, error) {
 	case string:
 		i, err := strconv.ParseInt(v, 10, 64)
 		return int(i), err
+	case nil:
+		return 0, ErrNotExist
 	}
 	return 0, ErrInvalidType
 }
@@ -76,6 +83,8 @@ func (j *Json) Int64() (int64, error) {
 		return int64(reflect.ValueOf(v).Uint()), nil
 	case string:
 		return strconv.ParseInt(v, 10, 64)
+	case nil:
+		return 0, ErrNotExist
 	}
 	return 0, ErrInvalidType
 }
@@ -93,6 +102,8 @@ func (j *Json) Uint64() (uint64, error) {
 		return reflect.ValueOf(v).Uint(), nil
 	case string:
 		return strconv.ParseUint(v, 10, 64)
+	case nil:
+		return 0, ErrNotExist
 	}
 	return 0, ErrInvalidType
 }
