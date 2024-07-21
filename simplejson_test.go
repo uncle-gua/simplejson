@@ -46,13 +46,13 @@ func TestSimplejson(t *testing.T) {
 		t.Fatal("got nil")
 	}
 
-	if got, _ := aws.GetIndex(0).Get("subkeyone").Int(); got != 1 {
+	if got, _ := aws.Index(0).Get("subkeyone").Int(); got != 1 {
 		t.Errorf("got %#v", got)
 	}
-	if got, _ := aws.GetIndex(1).Get("subkeytwo").Int(); got != 2 {
+	if got, _ := aws.Index(1).Get("subkeytwo").Int(); got != 2 {
 		t.Errorf("got %#v", got)
 	}
-	if got, _ := aws.GetIndex(1).Get("subkeythree").Int(); got != 3 {
+	if got, _ := aws.Index(1).Get("subkeythree").Int(); got != 3 {
 		t.Errorf("got %#v", got)
 	}
 

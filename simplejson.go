@@ -146,7 +146,7 @@ func (j *Json) GetPath(branch ...string) *Json {
 // a json array instead of a json object:
 //
 //	js.Get("top_level").Get("array").GetIndex(1).Get("key").Int()
-func (j *Json) GetIndex(index int) *Json {
+func (j *Json) Index(index int) *Json {
 	a, err := j.Array()
 	if err == nil {
 		if len(a) > index {

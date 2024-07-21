@@ -58,7 +58,7 @@ func TestNewFromReader(t *testing.T) {
 		t.Errorf("got %#v", ma)
 	}
 
-	mm := js.Get("test").Get("arraywithsubs").GetIndex(0).MustMap()
+	mm := js.Get("test").Get("arraywithsubs").Index(0).MustMap()
 	if !reflect.DeepEqual(mm, map[string]interface{}{"subkeyone": json.Number("1")}) {
 		t.Errorf("got %#v", mm)
 	}
@@ -116,7 +116,7 @@ func TestSimplejsonGo11(t *testing.T) {
 		t.Errorf("got %#v", ma)
 	}
 
-	mm := js.Get("test").Get("arraywithsubs").GetIndex(0).MustMap()
+	mm := js.Get("test").Get("arraywithsubs").Index(0).MustMap()
 	if !reflect.DeepEqual(mm, map[string]interface{}{"subkeyone": json.Number("1")}) {
 		t.Errorf("got %#v", mm)
 	}
