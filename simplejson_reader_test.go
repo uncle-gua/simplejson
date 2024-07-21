@@ -1,4 +1,4 @@
-package simplejson
+package simplejson_test
 
 import (
 	"bytes"
@@ -6,6 +6,8 @@ import (
 	"reflect"
 	"strconv"
 	"testing"
+
+	"github.com/uncle-gua/simplejson"
 )
 
 func TestNewFromReader(t *testing.T) {
@@ -21,7 +23,7 @@ func TestNewFromReader(t *testing.T) {
 			"uint64": 18446744073709551615
 		}
 	}`))
-	js, err := NewFromReader(buf)
+	js, err := simplejson.NewFromReader(buf)
 
 	//Standard Test Case
 	if js == nil {
@@ -37,15 +39,15 @@ func TestNewFromReader(t *testing.T) {
 	}
 	for i, v := range arr {
 		var iv int
-		switch v.(type) {
+		switch v := v.(type) {
 		case json.Number:
-			i64, err := v.(json.Number).Int64()
+			i64, err := v.Int64()
 			if err != nil {
 				t.Fatalf("got err %#v", err)
 			}
 			iv = int(i64)
 		case string:
-			iv, _ = strconv.Atoi(v.(string))
+			iv, _ = strconv.Atoi(v)
 		}
 		if iv != i+1 {
 			t.Errorf("got %#v expected %#v", iv, i+1)
@@ -70,7 +72,7 @@ func TestNewFromReader(t *testing.T) {
 }
 
 func TestSimplejsonGo11(t *testing.T) {
-	js, err := NewJson([]byte(`{
+	js, err := simplejson.NewJson([]byte(`{
 		"test": {
 			"array": [1, "2", 3],
 			"arraywithsubs": [
@@ -95,15 +97,15 @@ func TestSimplejsonGo11(t *testing.T) {
 	}
 	for i, v := range arr {
 		var iv int
-		switch v.(type) {
+		switch v := v.(type) {
 		case json.Number:
-			i64, err := v.(json.Number).Int64()
+			i64, err := v.Int64()
 			if err != nil {
 				t.Fatalf("got err %#v", err)
 			}
 			iv = int(i64)
 		case string:
-			iv, _ = strconv.Atoi(v.(string))
+			iv, _ = strconv.Atoi(v)
 		}
 		if iv != i+1 {
 			t.Errorf("got %#v expected %#v", iv, i+1)
